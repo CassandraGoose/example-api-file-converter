@@ -35,7 +35,7 @@ public class ConvertFiles {
 
 
   // Hit localhost:8080/convert-with-params with a body for form-data
-  // key: "file", value: "filepath"
+  // key: "file", value: "filegit "
   // key: "inputFormat", value: "DOCX" (or whatever format you are using)
   // key: "outputFormat", value: "TIF" (or whatever format you are usihng)
   @RequestMapping(value = "/convert-with-params", method = RequestMethod.POST)
@@ -48,6 +48,10 @@ public class ConvertFiles {
     return new ResponseEntity<String>("Please check that this worked", HttpStatus.OK);
   }
 
+  // Hit localhost:8080/convert-from-path with a body for form-data
+  // key: "path", value: "filepath"
+  // key: "inputFormat", value: "DOCX" (or whatever format you are using)
+  // key: "outputFormat", value: "TIF" (or whatever format you are usihng)
   @RequestMapping(value = "/convert-from-path", method = RequestMethod.POST) 
   public ResponseEntity<?> convertFile(@RequestParam("inputFormat") InputFormat input, @RequestParam("outputFormat") OutputFormat output, @RequestParam("path") String path) throws IOException, Exception {
     Converter converter = new Converter();
