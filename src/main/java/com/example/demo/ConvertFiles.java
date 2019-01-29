@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.io.File;
 import java.nio.file.Paths;
 
 
@@ -47,4 +48,11 @@ public class ConvertFiles {
     return new ResponseEntity<String>("Please check that this worked", HttpStatus.OK);
   }
 
+  @RequestMapping(value = "/convert-from-path", method = RequestMethod.POST) 
+  public ResponseEntity<?> convertFile(@RequestParam("inputFormat") InputFormat input, @RequestParam("outputFormat") OutputFormat output, @RequestParam("path") String path) throws IOException, Exception {
+    Converter converter = new Converter();
+    byte[] convertedBytes = converter.convertFileFromPath(path, input, output);
+    Files.write(Paths.get("./saved.tif"), convertedBytes);
+    return new ResponseEntity<String>("Please check that this worked", HttpStatus.OK);
+  }
 }
